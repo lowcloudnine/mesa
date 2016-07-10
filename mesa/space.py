@@ -25,16 +25,18 @@ Y = 1
 
 
 def accept_tuple_argument(wrapped_function):
-    """ Decorator to allow grid methods that take a list of (x, y) position tuples
-    to also handle a single position, by automatically wrapping tuple in
+    """ Decorator to allow grid methods that take a list of (x, y) position
+    tuples to also handle a single position, by automatically wrapping tuple in
     single-item list rather than forcing user to do it.
 
     """
+
     def wrapper(*args):
         if isinstance(args[1], tuple) and len(args[1]) == 2:
             return wrapped_function(args[0], [args[1]])
         else:
             return wrapped_function(*args)
+
     return wrapper
 
 
@@ -57,6 +59,7 @@ class Grid:
             ((x,y) tuples)
 
     """
+
     def __init__(self, height, width, torus):
         """ Create a new grid.
 
@@ -143,15 +146,16 @@ class Grid:
                 if moore and radius > 1 and (dy ** 2 + dx ** 2) ** .5 > radius:
                     continue
                 # Skip if not a torus and new coords out of bounds.
-                if not self.torus and (not (0 <= dx + x < self.width) or
-                        not (0 <= dy + y < self.height)):
+                if not self.torus and \
+                        (not (0 <= dx + x < self.width) or not (
+                                0 <= dy + y < self.height)):
                     continue
 
                 px = self.torus_adj(x + dx, self.width)
                 py = self.torus_adj(y + dy, self.height)
 
                 # Skip if new coords out of bounds.
-                if(self.out_of_bounds((px, py))):
+                if (self.out_of_bounds((px, py))):
                     continue
 
                 coords = (px, py)
@@ -317,7 +321,7 @@ class SingleGrid(Grid):
         super().__init__(height, width, torus)
         # Add all cells to the empties list.
         self.empties = list(itertools.product(
-                            *(range(self.width), range(self.height))))
+            *(range(self.width), range(self.height))))
 
     def move_to_empty(self, agent):
         """ Moves agent to a random empty cell, vacating agent's old cell. """
@@ -392,6 +396,7 @@ class MultiGrid(Grid):
     Methods:
         get_neighbors: Returns the objects surrounding a given cell.
     """
+
     @staticmethod
     def default_val():
         """ Default value for new cell elements. """
@@ -512,8 +517,12 @@ class ContinuousSpace:
         scale = max(self.cell_width, self.cell_height)
         cell_radius = math.ceil(radius / scale)
         cell_pos = self._point_to_cell(pos)
-        possible_objs = self._grid.get_neighbors(cell_pos,
-                                              True, True, cell_radius)
+        possible_objs = self._grid.get_neighbors(
+            cell_pos,
+            True,
+            True,
+            cell_radius
+        )
         neighbors = []
         # Iterate over candidates and check actual distance.
         for obj in possible_objs:
