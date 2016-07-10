@@ -1,4 +1,4 @@
-from MoneyModel import *
+import MoneyModel
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.modules import ChartModule
 from mesa.visualization.ModularVisualization import ModularServer
@@ -24,6 +24,9 @@ chart = ChartModule([
     data_collector_name='datacollector'
 )
 
-server = ModularServer(MoneyModel, [grid, chart], "Money Model", 100, 10, 10)
+server = ModularServer(MoneyModel.MoneyModel,
+                       [grid, chart],
+                       "Money Model",
+                       100, 10, 10)
 server.port = 8889
 server.launch()
