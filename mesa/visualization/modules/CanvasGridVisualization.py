@@ -1,15 +1,17 @@
-'''
-Modular Canvas rendering
-'''
+# -*- coding: utf-8 -*-
+"""
+Modular Canvas Rendering
+========================
+
+Module for visualizing model objects in grid cells.
+
+"""
 from collections import defaultdict
 from mesa.visualization.ModularVisualization import VisualizationElement
 
 
 class CanvasGrid(VisualizationElement):
-    '''
-    Module for visualizing model objects in grid cells.
-
-    A CanvasGrid object uses a user-provided portrayal method to generate a
+    """ A CanvasGrid object uses a user-provided portrayal method to generate a
     portrayal for each object. A portrayal is a JSON-ready dictionary which
     tells the relevant JavaScript code (GridDraw.js) where to draw what shape.
 
@@ -33,6 +35,11 @@ class CanvasGrid(VisualizationElement):
                   filled or not.
         "Layer": Layer number of 0 or above; higher-numbered layers are drawn
                  above lower-numbered layers.
+        "text": The text to be inscribed inside the Shape. Normally useful for
+                showing the unique_id of the agent.
+        "text_color": The color to draw the inscribed text. Should be given in
+                      conjunction of "text" property.
+
 
     Attributes:
         portrayal_method: Function which generates portrayals from objects, as
@@ -41,8 +48,8 @@ class CanvasGrid(VisualizationElement):
         canvas_height, canvas_width: Size, in pixels, of the grid visualization
                                      to draw on the client.
         template: "canvas_module.html" stores the module's HTML template.
-    '''
 
+    """
     package_includes = ["GridDraw.js", "CanvasModule.js"]
     portrayal_method = None  # Portrayal function
     canvas_height = 500
@@ -50,8 +57,7 @@ class CanvasGrid(VisualizationElement):
 
     def __init__(self, portrayal_method, grid_height, grid_width,
                  canvas_height=500, canvas_width=500):
-        '''
-        Instantiate a new CanvasGrid.
+        """ Instantiate a new CanvasGrid.
 
         Args:
             portrayal_method: function to convert each object on the grid to
@@ -59,8 +65,8 @@ class CanvasGrid(VisualizationElement):
             grid_height, grid_width: Size of the grid, in cells.
             canvas_height, canvas_width: Size of the canvas to draw in the
                                          client, in pixels. (default: 500x500)
-        '''
 
+        """
         self.portrayal_method = portrayal_method
         self.grid_height = grid_height
         self.grid_width = grid_width
@@ -84,4 +90,5 @@ class CanvasGrid(VisualizationElement):
                         portrayal["x"] = x
                         portrayal["y"] = y
                         grid_state[portrayal["Layer"]].append(portrayal)
+
         return grid_state

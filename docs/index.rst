@@ -25,14 +25,14 @@ notebook.*
 
 
 Features
-------------
+--------
 
 * Modular components
 * Browser-based visualization
 * Built-in tools for analysis
 
 Using Mesa
-------------
+----------
 
 Getting started quickly:
 
@@ -42,18 +42,20 @@ Getting started quickly:
 
 For more help on using Mesa, check out the following resources:
 
-* `Intro to Mesa Tutorial`_
+* `Mesa Introductory Tutorial`_
+* `Mesa Advanced Tutorial`_
 * `Docs`_
 * `Email list`_
 * `PyPI`_
 
-.. _`Intro to Mesa Tutorial` : http://mesa.readthedocs.org/en/latest/intro-tutorial.html
+.. _`Mesa Introductory Tutorial` : http://mesa.readthedocs.org/en/latest/intro_tutorial.html
+.. _`Mesa Advanced Tutorial` : http://mesa.readthedocs.org/en/latest/adv_tutorial.html
 .. _`Docs` : http://mesa.readthedocs.org/en/latest/
 .. _`Email list` : https://groups.google.com/d/forum/projectmesa
 .. _`PyPI` : https://pypi.python.org/pypi/Mesa/
 
 Contributing back to Mesa
-----------------------------
+-------------------------
 
 If you run into an issue, please file a `ticket`_ for us to discuss. If possible, follow up with a pull request.
 
@@ -68,20 +70,18 @@ If you would like to add a feature, please reach out via `ticket`_ or the `email
 .. _`Github` : https://github.com/projectmesa/mesa/
 
 
-
-**Table of Contents**
-
 .. toctree::
+   :hidden:
    :maxdepth: 1
 
-   Mesa overview <overview>
-   intro-tutorial
-
+   Mesa Overview <overview>
+   tutorials/intro_tutorial
+   tutorials/adv_tutorial
+   API Documentation <apis/api_main.rst>
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
-.. * :ref:`search`
-
+* :ref:`search`

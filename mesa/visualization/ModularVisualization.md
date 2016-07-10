@@ -1,5 +1,5 @@
 Modular Visualization - An In-Depth Look
-=================================================================
+========================================
 
 Modular visualization is (well, will be) one of Mesa's core features. Mesa does (will) include a (wide -- some day) range of predefined visualization modules, which can be easily subclassed for your needs, and mixed-and-matched to visualize your particular model. It should also be fairly straightforward to create new visualization modules. In this document, I will attempt to provide an overview of how to do both.
 
@@ -12,8 +12,10 @@ For example, if you have a model MyModel, and two elements, *canvas_vis* and *gr
     server = ModularServer(MyModel, [canvas_vis, graph_vis])
     server.launch()
 ```
-And then open your browser to http://127.0.0.1:8888/ in order to open it.
-
+And then open your browser to http://127.0.0.1:8888/ in order to open it. If you prefer a different port, for example 8887, you can pass it to the server:
+```python
+    server.launch(8887)
+```
 Under the hood, each visualization module consists of two parts: Python code which can take a model object and renders it into some data describing the visualization, and a JavaScript object which in turn receives data from the Python render (via the ModularServer) and actually draws it in the browser. 
 
 Phew.
