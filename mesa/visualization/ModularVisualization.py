@@ -88,6 +88,7 @@ import tornado.websocket
 import tornado.escape
 import tornado.gen
 
+
 # Suppress several pylint warnings for this file.
 # Attributes being defined outside of init is a Tornado feature.
 # pylint: disable=attribute-defined-outside-init
@@ -109,7 +110,6 @@ class VisualizationElement:
                 to the client.
 
     """
-
     package_includes = []
     local_includes = []
     js_code = ''
@@ -129,6 +129,7 @@ class VisualizationElement:
 
         """
         return "<b>VisualizationElement goes here</b>."
+
 
 # =============================================================================
 # Actual Tornado code starts here:
@@ -150,6 +151,7 @@ class PageHandler(tornado.web.RequestHandler):
 
 class SocketHandler(tornado.websocket.WebSocketHandler):
     """ Handler for websocket. """
+
     def open(self):
         if self.application.verbose:
             print("Socket opened!")
@@ -268,17 +270,19 @@ class ModularServer(tornado.web.Application):
         #TODO: Have this run concurrently (I think) inside the event loop?
 
         """
-        while self.model.schedule.steps < self.max_steps and self.model.running:
+        while self.model.schedule.steps < self.max_steps and \
+                self.model.running:
             self.model.step()
             self.viz_states.append(self.render_model())
 
             yield tornado.gen.Task(tornado.ioloop.IOLoop.current().add_timeout,
-                dt.timedelta(milliseconds=5))
+                                   dt.timedelta(milliseconds=5))
 
     def launch(self, port=None):
         """ Run the app. """
         if port is not None:
             self.port = port
-        print('Interface starting at http://127.0.0.1:{PORT}'.format(PORT=self.port))
+        print('Interface starting at http://127.0.0.1:{PORT}'.format(
+            PORT=self.port))
         self.listen(self.port)
         tornado.ioloop.IOLoop.instance().start()
